@@ -1,0 +1,215 @@
+//TP MONGO//
+1.DANS CMD:
+
+"C:\Users\user\mongodb\mongodb-win32-x86_64-2008plus-2.6.4\bin\mongod.exe"
+
+2.DANS UNE DEUXIEME CMD:
+  1. "C:\Users\user\mongodb\mongodb-win32-x86_64-2008plus-2.6.4\bin\mongo.exe"
+
+
+
+  2.use info :
+
+switched to db info
+_______________________________________________________________________________________________________________
+
+  3.insertion des tables:
+
+db.produits.insert({
+  nom: "Macbook Pro",
+  fabriquant: "Apple",
+  prix: 11435.99,
+  options: ["Intel Core i5", "Retina Display", "Long life battery"]
+})
+
+_____________________________________________________________________________________________________________
+
+db.produits.insert({
+  nom: " Macbook Air",
+  fabriquant: "Apple",
+  prix: 125794.73,
+  ultrabook : "true",
+  options: [" Intel Core i7", "SSD", "Long life battery"]
+})
+_______________________________________________________________________________________________________________
+
+db.produits.insert({
+  nom: " Thinkpad X230",
+  fabriquant: "Lenovo",
+  prix: 114358.74,
+  options: ["Intel Core i5", "SSD ", "Long life battery"]
+})
+
+_______________________________________________________________________________________________________________
+
+  1.Afficher tous les produits : db.produits.find().pretty()
+
+{
+  _id: ObjectId('68048270dec53ab388dc7ab0'),
+  nom: 'Macbook Pro',
+  fabriquant: 'Apple',
+  prix: 11435.99,
+  options: [
+    'Intel Core i5',
+    'Retina Display',
+    'Long life battery'
+  ]
+}
+
+{
+_id: ObjectId('6804828edec53ab388dc7ab1'),
+  nom: ' Macbook Air',
+  fabriquant: 'Apple',
+  prix: 125794.73,
+  ultrabook: 'true',
+  options: [
+    ' Intel Core i7',
+    'SSD',
+    'Long life battery'
+  ]
+}
+
+{
+ _id: ObjectId('680482c5cf27b2967d5def10'),
+  nom: 'Thinkpad X230',
+  fabriquant: 'Lenovo',
+  prix: 114358.74,
+  ultrabook: true,
+  options: [
+    'Intel Core i5',
+    'SSD',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  2. Récupérer le premier produit : db.produits.findOne()
+
+{
+ _id: ObjectId('68048270dec53ab388dc7ab0'),
+  nom: 'Macbook Pro',
+  fabriquant: 'Apple',
+  prix: 11435.99,
+  options: [
+    'Intel Core i5',
+    'Retina Display',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  3. Trouver l’id du Thinkpad : db.produits.find({ nom: "Thinkpad X230" })
+_______________________________________________________________________________________________________________
+
+  4. Récupérer le Thinkpad avec son _id : db.produits.find({ _id: ObjectId("5f2c1e8fc8f8a9c8b4d3babc") })
+
+{
+  _id: ObjectId('680482c5cf27b2967d5def10'),
+  nom: 'Thinkpad X230',
+  fabriquant: 'Lenovo',
+  prix: 114358.74,
+  ultrabook: true,
+  options: [
+    'Intel Core i5',
+    'SSD',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  5. Récupérer les produits dont le prix est supérieur à 13723 DA : db.produits.find({ prix: { $gt: 13723 } }).pretty()
+
+{
+  _id: ObjectId('6804828edec53ab388dc7ab1'),
+  nom: ' Macbook Air',
+  fabriquant: 'Apple',
+  prix: 125794.73,
+  ultrabook: 'true',
+  options: [
+    ' Intel Core i7',
+    'SSD',
+    'Long life battery'
+  ]
+}
+{
+  _id: ObjectId('680482c5cf27b2967d5def10'),
+  nom: 'Thinkpad X230',
+  fabriquant: 'Lenovo',
+  prix: 114358.74,
+  ultrabook: true,
+  options: [
+    'Intel Core i5',
+    'SSD',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  6. Récupérer le premier produit ayant ultrabook: true : db.produits.findOne({ ultrabook: true })
+
+{
+  _id: ObjectId('680482c5cf27b2967d5def10'),
+  nom: 'Thinkpad X230',
+  fabriquant: 'Lenovo',
+  prix: 114358.74,
+  ultrabook: true,
+  options: [
+    'Intel Core i5',
+    'SSD',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  7. Récupérer le premier produit dont le nom contient "Macbook" : db.produits.findOne({ nom: /Macbook/ })
+
+{
+  _id: ObjectId('68048270dec53ab388dc7ab0'),
+  nom: 'Macbook Pro',
+  fabriquant: 'Apple',
+  prix: 11435.99,
+  options: [
+    'Intel Core i5',
+    'Retina Display',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  8. Récupérer les produits dont le nom commence par "Macbook" : db.produits.find({ nom: /^Macbook/ }).pretty()
+
+{
+  _id: ObjectId('68048270dec53ab388dc7ab0'),
+  nom: 'Macbook Pro',
+  fabriquant: 'Apple',
+  prix: 11435.99,
+  options: [
+    'Intel Core i5',
+    'Retina Display',
+    'Long life battery'
+  ]
+}
+_______________________________________________________________________________________________________________
+
+  9. Supprimer les deux produits dont le fabricant est "Apple" : db.produits.remove({ fabriquant: "Apple" })
+
+{
+  acknowledged: true,
+  deletedCount: 2
+}
+_______________________________________________________________________________________________________________
+
+  10. Supprimer le Lenovo X230 en utilisant uniquement son _id : db.produits.find({ nom: "Thinkpad X230" })
+                                                                 db.produits.remove({ _id: ObjectId("6806b95a2619982b40f9d424") })
+
+
+
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+
+
+                                                                 
+
+
