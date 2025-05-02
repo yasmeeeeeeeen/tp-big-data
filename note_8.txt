@@ -1,0 +1,46 @@
+1.Télécharger l’image Docker : docker pull liliasfaxi/hadoop-cluster:latest
+
+2.Créer un réseau Docker pour connecter les conteneurs: docker network create Hadoop
+
+3. Lancer le conteneur Master (Namenode) : docker run -iid `
+  --net=hadoop `
+  -p 9870:9870 -p 8088:8088 -p 7077:7077 -p 16010:16010 `
+  --name hadoop-master `
+  --hostname hadoop-master `
+  liliasfaxi/hadoop-cluster:latest
+
+4.Worker 1:docker run -iid `
+  -p 8040:8042 `
+  --net=hadoop `
+  --name hadoop-worker1 `
+  --hostname hadoop-worker1 `
+  liliasfaxi/hadoop-cluster:latest
+
+5.Worker 2:docker run -iid `
+  -p 8041:8042 `
+  --net=hadoop `
+  --name hadoop-worker2 `
+  --hostname hadoop-worker2 `
+  liliasfaxi/hadoop-cluster:latest
+
+6. Accéder au conteneur master: docker exec -it hadoop-master bash
+
+7.démarrer Hadoop:  ./start-hadoop.sh 
+
+8.# Worker2
+docker exec -it hadoop-worker2 bash
+jps
+
+9.Créer le répertoire input dans HDFS :  hdfs dfs -mkdir -p input
+
+10.Charger des données dans HDFS : hdfs dfs -put purchases.txt input
+
+11.Vérifier le contenu : hdfs dfs -ls input
+hdfs dfs -tail input/purchases.txt
+
+____________________________________________________________________________________________________________________________________________________________
+
+
+
+
+
